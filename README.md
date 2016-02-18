@@ -1,3 +1,6 @@
+# THIS IS REALLY JUST A FORK FOR MY LEARNING PURPOSES ONLY SEE ORIGINAL REPO AT:
+[babel-angular2-app](https://github.com/shuhei/babel-angular2-app)
+
 # Build Angular 2 app with Babel
 
 A skeleton [Angular 2](https://angular.io/) app built with [Babel](https://babeljs.io/) and [Browserify](http://browserify.org/).
