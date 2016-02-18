@@ -20,13 +20,13 @@ gulp.task('copy', () => {
 });
 
 gulp.task('build', ['copy'], () => {
-  const b = browserify('src/index.js', { debug: true })
+  const b = browserify('src/app.js', { debug: true })
     .transform(babelify);
   return bundle(b);
 });
 
 gulp.task('watch', () => {
-  const b = browserify('src/index.js', assign({ debug: true }, watchify.args))
+  const b = browserify('src/app.js', assign({ debug: true }, watchify.args))
     .transform(babelify);
   const w = watchify(b)
     .on('update', () => bundle(w))
