@@ -8,7 +8,7 @@ import { Component } from 'angular2/core';
 @Component({
   selector: 'test',
   template: `
-      <button (click)="update()">test</button>
+      <a href (click)="update()">test</a>
       <p>{{testing}}</p>
       `
 })
@@ -21,7 +21,9 @@ class Test{
 
     update(){
       this.testing = 'omg it worked';
+      console.log(this.testing);
       return false;
+
     }
 }
 
