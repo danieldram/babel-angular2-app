@@ -46,8 +46,14 @@ class ArticleComponent {
     this.link = 'http://angular.io';
     this.votes;
   }
-  voteUp() { this.votes }
-  voteDown() { this.votes}
+  voteUp() :boolean {
+    this.votes += 1;
+    return false;
+  }
+  voteDown() :boolean {
+    this.votes -= 1;
+    return false;
+  }
 }
 
 
@@ -86,4 +92,5 @@ class RedditApp {
   }
 
 }
+
 bootstrap(RedditApp);
