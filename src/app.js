@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import 'babel-polyfill';
+import 'angular2/bundles/angular2-polyfills';
 
 import { bootstrap } from 'angular2/platform/browser';
 import { Component } from 'angular2/core';
