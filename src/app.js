@@ -4,6 +4,9 @@ import 'babel-polyfill';
 import { bootstrap } from 'angular2/platform/browser';
 import { Component } from 'angular2/core';
 
+class hmm{
+
+}
 
 @Component({
   selector: 'test',
@@ -23,7 +26,6 @@ class Test{
       this.testing = 'omg it worked';
       console.log(this.testing);
       return false;
-
     }
 }
 
