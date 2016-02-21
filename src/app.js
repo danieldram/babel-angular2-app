@@ -34,6 +34,9 @@ class Article {
     class: 'row'
   },
 template: `
+      <div>
+        <p>{{bug}}</p>
+      </div>
       <div class="four wide column center aligned votes">
         <div class="ui statistic">
           <div class="value"> {{ article.votes }}</div>
@@ -65,10 +68,12 @@ class ArticleComponent {
 
   constructor() {
     this.article =  new Article('Angular 2', 'http://angular.io', 3);
+    this.bug = "Why won't it update";
   }
   voteUp() :boolean {
     console.log('vote up');
     this.article.voteUp();
+    this.bug = "Does it work?";
     return false;
   }
   voteDown() :boolean {
