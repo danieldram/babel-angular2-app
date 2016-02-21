@@ -3,7 +3,8 @@ import 'babel-polyfill';
 import 'angular2/bundles/angular2-polyfills';
 
 import { bootstrap } from 'angular2/platform/browser';
-import { Component } from 'angular2/core';
+import { Component} from 'angular2/core';
+import { NgFor } from "angular2/common";
 
 
 class Article {
@@ -31,6 +32,7 @@ class Article {
 
 @Component({
   selector: 'reddit-article',
+  inputs: ['article'],
   host: {
     class: 'row'
   },
@@ -66,15 +68,11 @@ template: `
 
 class ArticleComponent {
   article: Article;
+  constructor() {}
 
-  constructor() {
-    this.article =  new Article('Angular 2', 'http://angular.io', 3);
-    this.bug = "Why won't it update";
-  }
   voteUp() :boolean {
     console.log('vote up');
     this.article.voteUp();
-    this.bug = "Does it work?";
     return false;
   }
   voteDown() :boolean {
@@ -86,7 +84,7 @@ class ArticleComponent {
 
 @Component({
   selector: 'reddit',
-  directives: [ArticleComponent],
+  directives: [ArticleComponent, NgFor],
   template: `
     <form class="ui large form segment">
       <h3 class="ui header">Add a Link</h3>
@@ -104,15 +102,23 @@ class ArticleComponent {
     </form>
 
     <div class="ui grid posts">
-      <reddit-article>
-      </reddit-article>
+      <reddit-article *ngFor="#article of articles" [article]="article"></reddit-article>
+
     </div>
 
     `
 })
 
 class RedditApp {
-  constructor() {}
+  articles: Article[];
+  constructor() {
+    this.articles = [
+      new Article('Angular 2', 'http://angular.io', 3),
+      new Article('Fullstack', 'http://fullstack.io', 2),
+      new Article('Angular Homepage', 'http://angular.io', 1),
+    ];
+
+  }
 
   addArticle(title: HTMLInputElement, link: HTMLInputElement): void {
     console.log(`Adding article title: ${title.value} and link: ${link.value}`);
