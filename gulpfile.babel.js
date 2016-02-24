@@ -20,18 +20,18 @@ gulp.task('copy', () => {
 });
 
 gulp.task('build', ['copy'], () => {
-  const b = browserify('src/app.js', { debug: true })
+  const b = browserify('src/component-example.js', { debug: true })
     .transform(babelify);
   return bundle(b);
 });
 
 gulp.task('watch', () => {
-  const b = browserify('src/app.js', assign({ debug: true }, watchify.args))
+  const b = browserify('src/component-example.js', assign({ debug: true }, watchify.args))
     .transform(babelify);
   const w = watchify(b)
     .on('update', () => bundle(w))
     .on('log', gutil.log);
-  return bundle(w)
+  return bundle(w);
 });
 
 gulp.task('clean', () => {
