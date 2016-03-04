@@ -1,11 +1,42 @@
 import 'reflect-metadata';
 import 'babel-polyfill';
+import 'es6-shim';
 import 'angular2/bundles/angular2-polyfills';
 
-import { bootstrap } from 'angular2/platform/browser';
-import { Component} from 'angular2/core';
 
-class ExampleTweets{
+
+import { bootstrap } from 'angular2/platform/browser';
+import { Component, EventEmitter } from 'angular2/core';
+import { NgFor} from 'angular2/common';
+
+console.log(EventEmitter);
+
+@Component({
+  selector:'tweet-list',
+  inputs: ['tweetList'],
+  outputs: ['onTweetClick'],
+  template:`
+    <div *ngFor="#tweet of tweetList" (click)='clicked(tweet)'>
+      <h1>{{tweet.name}}</h1>
+      <p>{{tweet.description}}</p>
+    </div>
+  `
+})
+class TweetList{
+  tweetList: ExampleTweet[];
+  onTweetClick: EventEmitter<ExampleTweet>;
+  currentTweet: ExampleTweet;
+  constructor(){
+    this.onTweetClick = new EventEmitter();
+  }
+
+  clicked(tweet:ExampleTweet){
+    this.currentTweet = tweet;
+    this.onTweetClick.emit(tweet);
+  }
+}
+
+class ExampleTweet{
   name:String;
   description:String;
   constructor({name, description}){
@@ -14,22 +45,29 @@ class ExampleTweets{
   }
 }
 
-
 @Component({
-  selector:'tweet-this',
+  selector:'component-app',
+  directives: [TweetList, NgFor],
   template:`
-    <div>
-      <h1>{{tweets.name}}</h1>
-      <p>{{tweets.description}}</p>
-    </div>
+    <tweet-list [tweetList]="tweets" (onTweetClick)="tweetClicked($event)"> </tweet-list>
   `
+
 })
 
-class ExampleTweet{
-  tweets: ExampleTweets;
+class ComponentApp{
+  tweets: ExampleTweet[];
   constructor(){
-    this.tweets = new ExampleTweets({name:"Kanye West", description:"Mark, man you got a minute??"});
+    this.tweets = [
+      new ExampleTweet({name:'Bob', description:'Hey John, How are are you doing??'}),
+      new ExampleTweet({name:'John', description:'Hey Julie, How are are you doing??'}),
+      new ExampleTweet({name:'Josh', description:'Hey Josh, How are are you doing??'}),
+      new ExampleTweet({name:'George', description:'Hey Markus, How are are you doing??'}),
+    ];
+  }
+
+  tweetClicked(tweet: ExampleTweet){
+    console.log(`${tweet.name} said ${tweet.description}`);
   }
 }
 
-bootstrap(ExampleTweet);
+bootstrap(ComponentApp);
