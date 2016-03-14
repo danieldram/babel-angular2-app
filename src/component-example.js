@@ -15,9 +15,14 @@ import { NgFor} from 'angular2/common';
   inputs: ['tweetList'],
   outputs: ['onTweetClick'],
   template:`
-    <div *ngFor="#tweet of tweetList; #i = index" (click)='clicked(tweet)'>
-      <h1 *ngIf="i==0">{{i}} - {{tweet.name}}</h1>
+    <div *ngFor="#tweet of tweetList; #i = index" (click)='clicked(tweet)'>\
+      <h1>{{i}} - {{tweet.name}}</h1>
       <p>{{tweet.description}}</p>
+      <div [ngSwitch]="i">
+        <p *ngSwitchWhen="0"> Bob mentioned something </p>
+        <p *ngSwitchWhen="1"> John mentioned something </p>
+      </div>
+
     </div>
   `
 })
