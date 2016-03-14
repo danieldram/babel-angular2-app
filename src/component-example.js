@@ -15,11 +15,16 @@ import { NgFor} from 'angular2/common';
   inputs: ['tweetList'],
   outputs: ['onTweetClick'],
   template:`
+    <input type="text" name="fontSize" value="{{fontinput.value}}" #fontinput>
+    <span [ngStyle]="{color: 'red'}" [style.font-size.px]="fontinput.value">
+      red text
+      </span>
+
     <div *ngFor="#tweet of tweetList; #i = index" (click)='clicked(tweet)'>\
       <h1>{{i}} - {{tweet.name}}</h1>
       <p>{{tweet.description}}</p>
       <div [ngSwitch]="i">
-        <p *ngSwitchWhen="0"> Bob mentioned something </p>
+        <p [style.background-color]="'yellow'" *ngSwitchWhen="0"> Bob mentioned something </p>
         <p *ngSwitchWhen="1"> John mentioned something </p>
       </div>
 
