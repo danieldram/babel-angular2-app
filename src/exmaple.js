@@ -9,14 +9,15 @@ import { bootstrap } from 'angular2/platform/browser';
 import { Component, EventEmitter } from 'angular2/core';
 import { NgFor} from 'angular2/common';
 
+console.log(EventEmitter);
 
 @Component({
   selector:'tweet-list',
   inputs: ['tweetList'],
   outputs: ['onTweetClick'],
   template:`
-    <div *ngFor="#tweet of tweetList; #i = index" (click)='clicked(tweet)'>
-      <h1>{{i}} - {{tweet.name}}</h1>
+    <div *ngFor="#tweet of tweetList" (click)='clicked(tweet)'>
+      <h1>{{tweet.name}}</h1>
       <p>{{tweet.description}}</p>
     </div>
   `
