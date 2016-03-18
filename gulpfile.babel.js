@@ -20,13 +20,13 @@ gulp.task('copy', () => {
 });
 
 gulp.task('build', ['copy'], () => {
-  const b = browserify('src/component-example.js', { debug: true })
+  const b = browserify('src/chapter-5-FORM_DIRECTIVES.js', { debug: true })
     .transform(babelify);
   return bundle(b);
 });
 
 gulp.task('watch', () => {
-  const b = browserify('src/component-example.js', assign({ debug: true }, watchify.args))
+  const b = browserify('src/chapter-5-FORM_DIRECTIVES.js', assign({ debug: true }, watchify.args))
     .transform(babelify);
   const w = watchify(b)
     .on('update', () => bundle(w))
