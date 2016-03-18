@@ -15,7 +15,7 @@ directives: [FORM_DIRECTIVES],
 template: `
     <h2> Demo Form Sku <h2>
     <div>
-      <form #f='ngForm' (ngSubmit)="onSubmit(f.value)">
+      <form #f='ngForm' (ngSubmit)="onSubmit(f)">
         <input type="text" id="skuInput" placeholder="SKU" ngControl="sku">
         <br>
         <button type="submit" class="ui button">Submit</button>
@@ -28,7 +28,7 @@ class DemoFormSku{
     console.log('class initiated');
   }
   onSubmit(form: any): void {
-  console.log('you submitted value:', form);
+  console.log(form);
   }
 }
 
